@@ -80,6 +80,8 @@ namespace NNCT
             return SerialPort.GetPortNames();
         }
 
+
+
         public override bool sendMessage(byte[] buffer , int count , int offset = 0)
         {
             if(serialPort.IsOpen == false)

@@ -6,11 +6,11 @@ namespace NNCT
 {
     interface ICommBase
     {
-        bool sendMessage(byte[] buffer);
+        bool sendMessage(byte[] buffer, int count, int offset);
 
     }
-    abstract class CommBaseClass
+    abstract class CommBaseClass : ICommBase
     {
-        public abstract bool sendMessage(byte[] buffer);
+        public abstract bool sendMessage(byte[] buffer, int count, int offset);
     }
 }
