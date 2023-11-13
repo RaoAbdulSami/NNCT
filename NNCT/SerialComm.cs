@@ -114,7 +114,10 @@ namespace NNCT
 
         }
 
+        public override byte[] readMessage()
+        {
 
+        }
 
 
 
