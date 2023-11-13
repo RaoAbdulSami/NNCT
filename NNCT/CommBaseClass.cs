@@ -8,6 +8,7 @@ namespace NNCT
     {
         bool sendMessage(byte[] buffer, int count, int offset);
 
+
     }
     abstract class CommBaseClass : ICommBase
     {
