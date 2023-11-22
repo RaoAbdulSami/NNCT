@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO.Ports;
+using NNCT.dataStructs;
+
 namespace NNCT
 {
     class SerialComm : CommBaseClass
@@ -10,7 +12,7 @@ namespace NNCT
         private SerialPort serialPort;
         private string _portName;
         private int _baudRate;
-        
+        private byte[] buffer = new byte [4096];
         /////////////////////////////////////////////  Properties /////////////////////////////////
 
         public string PortName
@@ -114,9 +116,41 @@ namespace NNCT
 
         }
 
-        public override byte[] readMessage()
+        public override ReadResult readMessage()
         {
+            ReadResult readResult = new ReadResult();
 
+            if (serialPort.IsOpen)
+            {
+
+                if (serialPort.BytesToRead > 0)
+                {
+                    try
+                    {
+
+                        serialPort.Read(buffer, 0, serialPort.BytesToRead);
+
+                        readResult.buffer = this.buffer;
+                        readResult.byteCount = serialPort.BytesToRead;
+                        return readResult;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+
+                        return null;
+                    }
+                }
+
+
+            }
+
+            else
+            {
+                Console.WriteLine("No serial Port available / open");
+            }
+
+            return null;
         }
 
 
